@@ -383,3 +383,83 @@ Imagine que você vai a um **Hotel**:
 1.  **Autenticação:** Você chega na recepção e apresenta seu **RG**. O recepcionista confirma que você é você mesmo.
 2.  **Autorização:** O recepcionista te entrega a **chave do quarto 204**. Essa chave abre a porta do seu quarto e a academia, mas **não abre** a porta da cozinha do hotel nem o escritório do gerente.
 3.  **Accounting:** No final da estadia, o hotel gera a **conta**. Eles sabem que você usou o frigibar três vezes e pediu serviço de quarto na terça-feira. Tudo foi registrado.
+
+
+---
+
+# Guia de Ameaças à Segurança da Informação
+
+No mundo da cibersegurança, as ameaças são geralmente divididas entre **técnicas** (software malicioso) e **humanas** (manipulação e comportamento). Para entender as ameaças, precisamos diferenciar a *ferramenta* usada do *método* de ataque.
+
+---
+
+## 1. Malware (Software Malicioso)
+**O que é:** *Malware* é a abreviação de "Malicious Software". É um termo "guarda-chuva" que engloba qualquer programa desenvolvido para infiltrar-se, danificar, desativar ou roubar dados de um sistema sem o consentimento do usuário.
+
+### Principais subtipos de Malware:
+*   **Vírus:** Anexa-se a um arquivo legítimo e precisa de interação humana (como abrir um `.exe`) para se espalhar.
+*   **Worm (Verme):** Diferente do vírus, o worm é autossuficiente. Ele explora vulnerabilidades de rede para se espalhar automaticamente de um computador para outro.
+*   **Trojan (Cavalo de Troia):** Disfarça-se de um software útil (ex: um jogo grátis ou um antivírus falso) para enganar o usuário e abrir uma "porta dos fundos" (*backdoor*) para o invasor.
+*   **Spyware:** Software espião que coleta informações (teclas digitadas, histórico de navegação) e as envia para terceiros.
+
+---
+
+## 2. Ransomware (O "Sequestrador")
+**O que é:** Um tipo específico e extremamente perigoso de malware. O Ransomware não apenas infecta a máquina, mas **criptografa** os arquivos do usuário, tornando-os ilegíveis.
+
+*   **Como funciona:** Após a criptografia, o atacante exibe uma mensagem exigindo o pagamento de um **resgate** (*ransom*), geralmente em criptomoedas (como Bitcoin), para liberar a chave de descriptografia.
+*   **Ransomware 2.0 (Dupla Extorsão):** Hoje, os criminosos não apenas bloqueiam os dados, mas também ameaçam **vazar as informações** confidenciais na internet caso o resgate não seja pago.
+*   **Exemplo Real:** O ataque *WannaCry*, que paralisou hospitais e empresas em todo o mundo em 2017.
+
+---
+
+## 3. Social Engineering (Engenharia Social)
+**O que é:** A engenharia social não é um software, mas sim uma **técnica de manipulação psicológica**. O objetivo é enganar as pessoas para que elas entreguem informações confidenciais ou realizem ações que comprometam a segurança.
+
+*   **O "Hacker Humano":** O atacante explora a confiança, a pressa, o medo ou a autoridade.
+*   **Técnicas comuns:**
+    *   **Pretexting:** Criar uma história convincente (ex: "Sou do suporte técnico e notei um erro na sua conta").
+    *   **Baiting (Isca):** Deixar um pendrive infectado "perdido" no estacionamento de uma empresa para que alguém curioso o conecte ao computador.
+    *   **Quid Pro Quo:** Oferecer um benefício em troca de informação (ex: "Faço a atualização do seu PC se você me der sua senha").
+
+---
+
+## 4. Phishing (A "Pesca" de Dados)
+**O que é:** O *Phishing* é a aplicação mais comum da engenharia social. O termo vem de *fishing* (pescar), pois o atacante "lança a isca" esperando que alguém morda.
+
+*   **Como funciona:** Envio de comunicações fraudulentas (e-mail, SMS, redes sociais) que imitam marcas ou pessoas confiáveis (bancos, Netflix, Governo).
+*   **Variações:**
+    *   **Spear Phishing:** Ataque focado em um alvo específico (ex: um e-mail personalizado para o Diretor Financeiro de uma empresa).
+    *   **Smishing:** Phishing via SMS.
+    *   **Vishing:** Phishing via voz (chamadas telefônicas).
+*   **Exemplo Real:** Um e-mail dizendo: *"Sua conta foi bloqueada! Clique aqui para atualizar seus dados agora"*, levando a usuário a uma página falsa que rouba a senha.
+
+---
+
+## 5. Insider Threat (Ameaça Interna)
+**O que é:** Diferente dos ataques externos, a *Insider Threat* ocorre quando a ameaça vem de **dentro da organização**. É alguém que já possui acesso legítimo aos sistemas (funcionários, ex-funcionários, contratados ou parceiros).
+
+### Os três tipos de "Insiders":
+1.  **O Malicioso:** O funcionário que rouba segredos industriais para vender ao concorrente ou que deleta dados por vingança após ser demitido.
+2.  **O Negligente:** O funcionário que, sem intenção de causar mal, deixa a senha anotada em um post-it ou clica em um link de phishing, abrindo a porta para hackers.
+3.  **O Infiltrado:** Um agente externo que consegue um emprego na empresa apenas para roubar dados de dentro.
+
+---
+
+## 📊 Resumo Comparativo
+
+| Ameaça | Natureza | Método Principal | Alvo | Impacto Principal |
+| :--- | :--- | :--- | :--- | :--- |
+| **Malware** | Técnica | Código Malicioso | Sistema / Software | Instabilidade / Roubo |
+| **Ransomware** | Técnica | Criptografia | Dados / Arquivos | Perda de Dados / Financeiro |
+| **Soc. Engineering** | Humana | Manipulação | Psicologia Humana | Quebra de Confiança |
+| **Phishing** | Humana | Comunicação Falsa | Credenciais (Senhas) | Roubo de Identidade |
+| **Insider Threat** | Humana | Acesso Legítimo | Infraestrutura Interna | Espionagem / Sabotagem |
+
+---
+
+## 🛡️ Dicas de Prevenção (Resumo)
+
+*   **Contra Malware/Ransomware:** Manter softwares atualizados e ter **Backups offline** regulares.
+*   **Contra Phishing/Eng. Social:** Desconfiar de urgências excessivas, verificar o remetente e nunca clicar em links suspeitos.
+*   **Contra Insider Threats:** Aplicar o **Princípio do Menor Privilégio** (dar ao usuário apenas o acesso necessário para sua função) e monitorar logs de acesso.
