@@ -140,8 +140,6 @@ Todos os protocolos abaixo pertencem à **Camada de Aplicação**.
 | **SMTP**  | Envio de E-mail               | 25    | Mensagens de E-mail           |
 
 
-Aqui está o conteúdo formatado em **Markdown (.md)**, com a organização de tabelas, fórmulas e destaques para facilitar a leitura e o estudo.
-
 ---
 
 # Subnetting e CIDR: Calculando Sub-redes Manualmente
