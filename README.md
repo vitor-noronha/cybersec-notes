@@ -224,3 +224,82 @@ $$\text{IPs Totais} = 2^{(32 - \text{CIDR})}$$
 *   **/26:** $2^{(32-26)} = 2^6 = 64$ IPs.
 
 > **Lembre-se:** Subtraia sempre **2** para obter os IPs utilizáveis (o primeiro é a Rede e o último é o Broadcast).
+
+---
+
+# A Tríade CIA: A Base da Segurança da Informação
+
+A **Tríade CIA** (do inglês *Confidentiality, Integrity, Availability*) é a base de toda a Segurança da Informação. Imagine que ela é um tripé: se qualquer uma dessas pernas for quebrada, a segurança do sistema como um todo desmorona.
+
+> **Importante:** Não tem nada a ver com a agência de espionagem dos EUA, mas sim com três pilares fundamentais da tecnologia.
+
+---
+
+## 1. Confidencialidade (*Confidentiality*)
+
+**O que é:** Garantir que a informação seja acessada **apenas por quem tem autorização**. É o ato de manter segredos. Se alguém não autorizado consegue ler um dado, a confidencialidade foi quebrada.
+
+### Como se garante?
+*   **Criptografia:** Transforma o texto em algo ilegível para quem não tem a chave.
+*   **Controle de Acesso/Senhas:** Apenas usuários autenticados entram.
+*   **MFA (Autenticação de Dois Fatores):** Uma camada extra de proteção.
+
+### Exemplo Real
+*   **WhatsApp:** Quando você envia uma mensagem, ela é criptografada de ponta a ponta. Nem o Facebook/Meta consegue ler o conteúdo; apenas você e o destinatário possuem a "chave" para a leitura.
+
+### O que acontece se falhar?
+*   **Vazamento de Dados:** Se um hacker invade um banco de dados e expõe as senhas ou CPFs de milhões de clientes, houve uma quebra de confidencialidade.
+
+---
+
+## 2. Integridade (*Integrity*)
+
+**O que é:** Garantir que a informação seja **precisa, completa e não tenha sido alterada** de forma indevida. A informação deve ser confiável desde a origem até o destino.
+
+### Como se garante?
+*   **Hashing (Soma de Verificação):** Um código único gerado a partir de um arquivo. Se um único bit do arquivo mudar, o código (*hash*) muda completamente.
+*   **Assinaturas Digitais:** Provam que o documento não foi alterado após a assinatura.
+*   **Controle de Versão:** Registro de quem alterou o quê e quando.
+
+### Exemplo Real
+*   **Transferência Bancária:** Imagine que você transfere R$ 10,00 para um amigo. Se um hacker interceptar esse pacote de dados e alterar o valor para R$ 1.000,00, ele quebrou a integridade da transação. O banco usa mecanismos de integridade para garantir que o valor enviado seja exatamente o recebido.
+
+### O que acontece se falhar?
+*   **Informação Corrompida:** Um prontuário médico onde o tipo sanguíneo do paciente é alterado por erro ou malícia, podendo levar a um erro fatal em uma cirurgia.
+
+---
+
+## 3. Disponibilidade (*Availability*)
+
+**O que é:** Garantir que a informação e os sistemas estejam **acessíveis e funcionando** sempre que o usuário autorizado precisar deles. De nada adianta um dado ser secreto e íntegro se você não consegue acessá-lo.
+
+### Como se garante?
+*   **Redundância:** Ter dois ou mais servidores fazendo a mesma coisa (se um cai, o outro assume).
+*   **Backups:** Cópias de segurança para restaurar o sistema após uma falha.
+*   **Proteção contra DDoS:** Sistemas que evitam que o servidor seja derrubado por excesso de acessos falsos.
+
+### Exemplo Real
+*   **Amazon na Black Friday:** Milhões de pessoas acessando ao mesmo tempo. Para manter a disponibilidade, a Amazon usa milhares de servidores espalhados pelo mundo (**Balanceamento de Carga**). Se o site ficasse fora do ar por 1 hora, a disponibilidade teria falhado e a empresa perderia milhões.
+
+### O que acontece se falhar?
+*   **Interrupção de Serviço:** Um ataque de *Ransomware* que sequestra os dados de um hospital. Os médicos não conseguem acessar as fichas dos pacientes. Os dados ainda estão lá (confidencialidade) e não foram alterados (integridade), mas não estão **disponíveis**.
+
+---
+
+## 📊 Resumo Comparativo
+
+| Pilar | Objetivo Principal | Pergunta Chave | Ferramenta Comum | Exemplo de Falha |
+| :--- | :--- | :--- | :--- | :--- |
+| **Confidencialidade** | Sigilo | "Quem pode ver isso?" | Criptografia | Vazamento de senhas |
+| **Integridade** | Precisão | "Isso foi alterado?" | Hash / Assinatura | Alteração de saldo bancário |
+| **Disponibilidade** | Acesso | "O sistema está online?" | Redundância / Backup | Site fora do ar (DDoS) |
+
+---
+
+## ⚖️ O Equilíbrio da Tríade
+
+Na vida real, é difícil ter 100% dos três pilares ao mesmo tempo. Existe sempre um ***trade-off*** (equilíbrio).
+
+**Exemplo:** Se você colocar 50 camadas de senhas, biometria e reconhecimento facial para acessar um arquivo (**Confidencialidade máxima**), você tornará o acesso muito lento e difícil para o usuário, prejudicando severamente a **Disponibilidade**.
+
+O profissional de segurança da informação decide onde colocar o peso do tripé dependendo do que é mais crítico para cada tipo de negócio.
