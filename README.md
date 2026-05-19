@@ -303,3 +303,83 @@ Na vida real, é difícil ter 100% dos três pilares ao mesmo tempo. Existe semp
 **Exemplo:** Se você colocar 50 camadas de senhas, biometria e reconhecimento facial para acessar um arquivo (**Confidencialidade máxima**), você tornará o acesso muito lento e difícil para o usuário, prejudicando severamente a **Disponibilidade**.
 
 O profissional de segurança da informação decide onde colocar o peso do tripé dependendo do que é mais crítico para cada tipo de negócio.
+
+
+---
+
+# AAA Framework: Authentication, Authorization, and Accounting
+
+O **AAA Framework** é um modelo conceitual utilizado para controlar o acesso a redes e recursos de computação. Ele define a arquitetura necessária para garantir que apenas pessoas autorizadas acessem um sistema, que elas façam apenas o que lhes é permitido e que todas as suas ações sejam registradas.
+
+Imagine o AAA como o "sistema de segurança de um prédio empresarial": ele controla quem entra, onde a pessoa pode circular e registra a hora de entrada e saída.
+
+---
+
+## 1. Authentication (Autenticação)
+**Pergunta chave:** *"Quem é você?"*
+
+A autenticação é o primeiro passo. É o processo de verificar a identidade de um usuário, dispositivo ou sistema. O objetivo é garantir que a entidade é realmente quem ela diz ser.
+
+*   **Como funciona:** O usuário fornece "algo" para provar sua identidade. Existem três fatores principais de autenticação:
+    *   **Algo que você sabe:** Senhas, PINs, perguntas de segurança.
+    *   **Algo que você tem:** Tokens físicos, cartões inteligentes, smartphones (SMS/Apps de autenticação).
+    *   **Algo que você é:** Biometria (impressão digital, reconhecimento facial, íris).
+*   **Exemplo Real:** Quando você digita seu usuário e senha no Gmail e depois confirma o acesso através de um código enviado ao seu celular (MFA).
+
+---
+
+## 2. Authorization (Autorização)
+**Pergunta chave:** *"O que você pode fazer aqui?"*
+
+Uma vez que o sistema sabe quem você é (autenticação), ele precisa decidir quais privilégios você possui. A autorização define as permissões de acesso aos recursos.
+
+*   **Como funciona:** O sistema consulta uma lista de permissões ou perfis vinculados àquela identidade.
+    *   **RBAC (Role-Based Access Control):** Controle de acesso baseado em funções. Ex: Um "Administrador" pode deletar arquivos, mas um "Visitante" pode apenas ler.
+    *   **ACLs (Access Control Lists):** Listas que definem explicitamente quem pode acessar o quê.
+*   **Exemplo Real:** Em um sistema de empresa, o funcionário do RH consegue ver a folha de pagamento de todos os funcionários, mas o desenvolvedor de software (embora autenticado no mesmo sistema) não tem permissão para acessar essa pasta.
+
+---
+
+## 3. Accounting (Accounting/Auditoria)
+**Pergunta chave:** *"O que você fez e quando?"*
+
+A contabilização (ou auditoria) é o processo de rastrear e registrar as atividades do usuário enquanto ele está no sistema. Isso é fundamental para segurança, faturamento e conformidade legal.
+
+*   **Como funciona:** O sistema gera logs (registros) detalhados de cada ação.
+    *   **O que é registrado:** Horário de login/logout, arquivos acessados, comandos executados e alterações feitas no sistema.
+    *   **Finalidade:** Se ocorrer um ataque ou erro, o administrador pode olhar os logs para saber exatamente quem foi o responsável e como aconteceu.
+*   **Exemplo Real:** Um log de servidor que mostra: *"O usuário 'admin_joao' alterou a configuração do Firewall às 14:30 do dia 10/05 através do IP 192.168.1.50"*.
+
+---
+
+## 🚀 Resumo Comparativo
+
+| Pilar | Objetivo | Foco | Exemplo Prático |
+| :--- | :--- | :--- | :--- |
+| **Authentication** | Validar Identidade | **Identidade** | Digitar senha e usar biometria. |
+| **Authorization** | Definir Permissões | **Privilégios** | Ter acesso à pasta "Financeiro", mas não à "RH". |
+| **Accounting** | Monitorar Ações | **Rastreabilidade** | Log de auditoria registrando a alteração de um arquivo. |
+
+---
+
+## 🛠️ Protocolos Comuns de Implementação
+
+Na prática, o AAA não é apenas um conceito, mas é implementado através de protocolos de rede. Os dois mais famosos são:
+
+### 1. RADIUS (Remote Authentication Dial-In User Service)
+*   **Uso:** Muito comum em Wi-Fis corporativos (WPA2/WPA3 Enterprise) e VPNs.
+*   **Características:** Combina Autenticação e Autorização em um único passo. É mais simples e amplamente compatível.
+
+### 2. TACACS+ (Terminal Access Controller Access-Control System Plus)
+*   **Uso:** Administradores de rede configurando roteadores e switches (Cisco).
+*   **Características:** Separa completamente a Autenticação, a Autorização e a Auditoria. É mais seguro e oferece controle granular sobre cada comando que o administrador pode digitar.
+
+---
+
+## 💡 Analogia Final para Memorizar
+
+Imagine que você vai a um **Hotel**:
+
+1.  **Autenticação:** Você chega na recepção e apresenta seu **RG**. O recepcionista confirma que você é você mesmo.
+2.  **Autorização:** O recepcionista te entrega a **chave do quarto 204**. Essa chave abre a porta do seu quarto e a academia, mas **não abre** a porta da cozinha do hotel nem o escritório do gerente.
+3.  **Accounting:** No final da estadia, o hotel gera a **conta**. Eles sabem que você usou o frigibar três vezes e pediu serviço de quarto na terça-feira. Tudo foi registrado.
