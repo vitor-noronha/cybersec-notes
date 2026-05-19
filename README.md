@@ -138,3 +138,80 @@ Todos os protocolos abaixo pertencem à **Camada de Aplicação**.
 | **FTP**   | Transferência de Arquivos     | 21    | Arquivos / Pastas             |
 | **SSH**   | Acesso Remoto Seguro          | 22    | Comandos de Terminal          |
 | **SMTP**  | Envio de E-mail               | 25    | Mensagens de E-mail           |
+
+
+Subnetting e CIDR: Calculando Sub-redes Manualmente
+1. Conceitos Básicos
+Endereço IP: Composto por 32 bits (4 octetos de 8 bits). Ex: 192.168.1.0
+Máscara de Rede: Define qual parte do IP é a Rede (Network) e qual parte é o Host (dispositivo).
+CIDR (Classless Inter-Domain Routing): É a barra (/) seguida de um número. Esse número indica quantos bits "1" existem na máscara.
+/24 significa que os primeiros 24 bits são "1" e os últimos 8 são "0".
+2. A Tabela de Referência (O Segredo)
+Para calcular /24, /25 e /26, estamos mexendo no 4º octeto. Confira os valores possíveis de um octeto (8 bits):
+
+CIDR	Binário (4º octeto)	Máscara Decimal	Valor do "Salto" (Número Mágico)
+/24	00000000	.0	256
+/25	10000000	.128	128
+/26	11000000	.192	64
+/27	11100000	.224	32
+Como achar o Número Mágico? Basta fazer: $256 - (\text{valor da máscara})$.
+
+Exemplo /26: $256 - 192 = 64$.
+3. Calculando na Prática
+IP base: 192.168.1.0
+
+Exemplo 1: /24
+Máscara: 255.255.255.0
+Número Mágico: 256
+Cálculo: Como o salto é 256, só existe uma única rede.
+Endereço de Rede: 192.168.1.0
+Primeiro Host: 192.168.1.1
+Último Host: 192.168.1.254
+Broadcast: 192.168.1.255
+Total de IPs úteis: $256 - 2 = 254$.
+Exemplo 2: /25 (Divide a rede em 2)
+Máscara: 255.255.255.128
+Número Mágico: 128
+Redes: Começam no 0 e saltam de 128 em 128.
+Rede	Endereço de Rede	Primeiro Host	Último Host	Broadcast
+1ª	...1.0	...1.1	...1.126	...1.127
+2ª	...1.128	...1.129	...1.254	...1.255
+Total de IPs úteis por sub-rede: $128 - 2 = 126$.
+Exemplo 3: /26 (Divide a rede em 4)
+Máscara: 255.255.255.192
+Número Mágico: 64
+Redes: Saltam de 64 em 64.
+Rede	Rede (ID)	Primeiro Host	Último Host	Broadcast
+1ª	...1.0	...1.1	...1.62	...1.63
+2ª	...1.64	...1.65	...1.126	...1.127
+3ª	...1.128	...1.129	...1.190	...1.191
+4ª	...1.192	...1.193	...1.254	...1.255
+Total de IPs úteis por sub-rede: $64 - 2 = 62$.
+4. Resumo do Passo a Passo
+Identifique o CIDR (ex: /26).
+Descubra a Máscara Decimal (ex: .192).
+Calcule o Número Mágico ($256 - 192 = 64$).
+Liste as Redes: Comece do .0 e some o número mágico sucessivamente (0, 64, 128, 192...).
+Determine o Broadcast: O Broadcast de uma rede é sempre um número antes do início da próxima rede.
+Ex: Se a Rede 2 começa em .64, o Broadcast da Rede 1 é .63.
+Determine os Hosts: Os hosts são todos os números entre a Rede e o Broadcast.
+💡 Dica de Ouro (Fórmula de IPs)
+Para saber quantos IPs totais existem em uma sub-rede sem fazer a tabela:
+
+IPs Totais
+=
+2
+(
+32
+−
+CIDR
+)
+IPs Totais=2 
+(32−CIDR)
+ 
+
+/24: $2^{(32-24)} = 2^8 = 256$ IPs.
+/25: $2^{(32-25)} = 2^7 = 128$ IPs.
+/26: $2^{(32-26)} = 2^6 = 64$ IPs.
+Lembre-se: Subtraia sempre 2 para obter os IPs utilizáveis (o primeiro é a Rede e o último é o Broadcast).
+
