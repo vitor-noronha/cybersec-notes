@@ -463,3 +463,140 @@ No mundo da cibersegurança, as ameaças são geralmente divididas entre **técn
 *   **Contra Malware/Ransomware:** Manter softwares atualizados e ter **Backups offline** regulares.
 *   **Contra Phishing/Eng. Social:** Desconfiar de urgências excessivas, verificar o remetente e nunca clicar em links suspeitos.
 *   **Contra Insider Threats:** Aplicar o **Princípio do Menor Privilégio** (dar ao usuário apenas o acesso necessário para sua função) e monitorar logs de acesso.
+
+---
+
+# 🛡️ Guia OWASP Top 10: As Vulnerabilidades Web Mais Críticas
+
+## 📌 Introdução
+O **OWASP Top 10** é um documento padrão para desenvolvedores e profissionais de segurança web. Ele identifica as dez vulnerabilidades de segurança de aplicações web mais críticas, baseando-se em dados de centenas de aplicações e milhares de especialistas.
+
+**Importante:** O Top 10 não é uma lista exaustiva de todas as vulnerabilidades, mas sim um guia de conscientização sobre os riscos mais prevalentes.
+
+---
+
+## 🚀 As 10 Vulnerabilidades (Versão 2021)
+
+### 1. A01:2021 – Broken Access Control (Quebra de Controle de Acesso)
+Ocorre quando as restrições sobre o que as usuários autenticados podem fazer não são aplicadas corretamente. 
+
+*   **O que é:** Um usuário consegue acessar dados ou funções que não deveria (ex: acessar a página de admin sendo um usuário comum).
+*   **Exemplo:** Alterar a URL de `meusite.com/perfil/123` para `meusite.com/perfil/124` e conseguir ver os dados de outro usuário.
+*   **Como prevenir:** 
+    *   Implementar o **Princípio do Menor Privilégio**.
+    *   Negar o acesso por padrão (Deny by default).
+    *   Validar permissões no servidor em cada requisição.
+
+### 2. A02:2021 – Cryptographic Failures (Falhas Criptográficas)
+Anteriormente chamado de "Exposição de Dados Sensíveis". Foca na falha em proteger dados em repouso ou em trânsito.
+
+*   **O que é:** Uso de algoritmos de criptografia fracos, senhas armazenadas em texto simples ou falta de HTTPS.
+*   **Exemplo:** Armazenar senhas usando MD5 (algoritmo obsoleto e vulnerável) em vez de Argon2 ou BCrypt.
+*   **Como prevenir:** 
+    *   Criptografar todos os dados sensíveis.
+    *   Usar protocolos modernos (TLS 1.3).
+    *   Utilizar hashes fortes com *salt*.
+
+### 3. A03:2021 – Injection (Injeção)
+Acontece quando dados não confiáveis são enviados para um interpretador como parte de um comando ou consulta.
+
+*   **O que é:** O atacante "injeta" código malicioso que o servidor executa. Inclui **SQL Injection (SQLi)** e **Cross-Site Scripting (XSS)**.
+*   **Exemplo:** No campo de login, digitar `' OR '1'='1` para burlar a autenticação de um banco de dados.
+*   **Como prevenir:** 
+    *   Utilizar **Consultas Parametrizadas (Prepared Statements)**.
+    *   Validar e sanitizar todas as entradas do usuário.
+    *   Usar APIs seguras.
+
+### 4. A04:2021 – Insecure Design (Design Inseguro)
+Diferente de um erro de implementação, aqui o problema está na **arquitetura** da aplicação.
+
+*   **O que é:** Falhas que ocorrem antes mesmo do código ser escrito, devido a requisitos de segurança mal planejados.
+*   **Exemplo:** Um sistema de recuperação de senha que faz perguntas óbvias (ex: "Qual a cor do seu carro?"), permitindo que qualquer pessoa adivinhe.
+*   **Como prevenir:** 
+    *   Implementar **Modelagem de Ameaças (Threat Modeling)**.
+    *   Utilizar bibliotecas de design de segurança comprovadas.
+    *   Realizar revisões de design com especialistas.
+
+### 5. A05:2021 – Security Misconfiguration (Configuração Incorreta de Segurança)
+Ocorre quando as configurações de segurança não são definidas ou são configuradas de forma incorreta/padrão.
+
+*   **O que é:** Deixar portas abertas desnecessariamente, usar senhas padrão de admin ou exibir mensagens de erro detalhadas para o usuário.
+*   **Exemplo:** Um servidor Tomcat instalado com a conta `admin/admin` ativa.
+*   **Como prevenir:** 
+    *   Remover recursos e funcionalidades não utilizados.
+    *   Alterar todas as senhas padrão imediatamente.
+    *   Automatizar o processo de *hardening* (endurecimento) do sistema.
+
+### 6. A06:2021 – Vulnerable and Outdated Components (Componentes Vulneráveis e Desatualizados)
+Uso de bibliotecas, frameworks ou dependências que possuem vulnerabilidades conhecidas.
+
+*   **O que é:** Manter versões antigas de softwares que já possuem "patches" (correções) disponíveis, mas não aplicados.
+*   **Exemplo:** Usar uma versão do Log4j vulnerável ao *Log4Shell*.
+*   **Como prevenir:** 
+    *   Manter um inventário de todas as dependências (SBOM).
+    *   Usar ferramentas de scan de dependências (ex: `npm audit`, Snyk).
+    *   Atualizar componentes regularmente.
+
+### 7. A07:2021 – Identification and Authentication Failures (Falhas de Identificação e Autenticação)
+Problemas na confirmação da identidade do usuário.
+
+*   **O que é:** Permitir senhas fracas, não ter proteção contra ataques de força bruta ou falhas na gestão de sessões.
+*   **Exemplo:** Permitir que um usuário tente a senha 1.000 vezes sem bloquear a conta ou expirar a sessão.
+*   **Como prevenir:** 
+    *   Implementar **Autenticação de Múltiplos Fatores (MFA)**.
+    *   Impor políticas de senhas fortes.
+    *   Gerar IDs de sessão longos e aleatórios.
+
+### 8. A08:2021 – Software and Data Integrity Failures (Falhas de Integridade de Software e Dados)
+Ocorre quando o software assume que a integridade de um dado ou código e válida sem verificá-la.
+
+*   **O que é:** Inclui a **Desserialização Insegura**, onde um objeto é reconstruído a partir de dados maliciosos.
+*   **Exemplo:** Baixar uma atualização de software de um servidor sem verificar a assinatura digital do arquivo.
+*   **Como prevenir:** 
+    *   Utilizar assinaturas digitais para verificar a origem do código.
+    *   Não aceitar objetos serializados de fontes não confiáveis.
+    *   Implementar verificações de integridade (Checksum).
+
+### 9. A09:2021 – Security Logging and Monitoring Failures (Falhas de Log e Monitoramento de Segurança)
+A incapacidade de detectar, registrar e responder a ataques em tempo real.
+
+*   **O que é:** Não ter logs dos eventos críticos ou ter logs que não são monitorados, permitindo que um invasor permaneça no sistema por meses.
+*   **Exemplo:** Um atacante tenta 10 mil logins por hora, mas o sistema não gera nenhum alerta para o administrador.
+*   **Como prevenir:** 
+    *   Registrar falhas de autenticação e acessos a dados sensíveis.
+    *   Utilizar sistemas de monitoramento centralizados (ex: SIEM, ELK Stack).
+    *   Estabelecer alertas para atividades suspeitas.
+
+### 10. A10:2021 – Server-Side Request Forgery (SSRF)
+Ocorre quando uma aplicação web busca um recurso remoto sem validar a URL fornecida pelo usuário.
+
+*   **O que é:** O atacante força o servidor a fazer requisições para endereços internos ou externos que deveriam ser inacessíveis.
+*   **Exemplo:** Um site que gera preview de links. O atacante envia `http://localhost:8080/admin` para tentar acessar o painel interno do servidor.
+*   **Como prevenir:** 
+    *   Validar e sanitizar a URL de entrada.
+    *   Usar uma *Allow-list* (lista permitida) de domínios.
+    *   Isolar a rede do servidor web para que ele não acesse a rede interna.
+
+---
+
+## 🛠️ Resumo para Implementação Rápida
+
+| Vulnerabilidade | Foco Principal | Solução Chave |
+| :--- | :--- | :--- |
+| **Access Control** | Permissões | Menor Privilégio |
+| **Cryptographic Failures** | Proteção de Dados | Criptografia Forte / HTTPS |
+| **Injection** | Entrada de Dados | Parametrização $\to$ Query |
+| **Insecure Design** | Arquitetura | Modelagem de Ameaças |
+| **Security Misconfig** | Configurações | Hardening / Automação |
+| **Vulnerable Components** | Dependências | Atualizações / Scans |
+| **Auth Failures** | Identidade | MFA / Senhas Fortes |
+| **Integrity Failures** | Confiança no Código | Assinaturas Digitais |
+| **Logging Failures** | Visibilidade | Monitoramento Ativo (SIEM) |
+| **SSRF** | Requisições do Servidor | Allow-lists de URL |
+
+---
+
+## 📚 Recursos Adicionais
+*   **Site Oficial:** [owasp.org](https://owasp.org)
+*   **OWASP ZAP:** Ferramenta gratuita de scan de vulnerabilidades.
+*   **Juice Shop:** Uma aplicação propositalmente vulnerável da OWASP para você praticar.
